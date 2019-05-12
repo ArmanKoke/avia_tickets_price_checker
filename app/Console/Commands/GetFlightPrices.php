@@ -37,6 +37,7 @@ class GetFlightPrices extends Command
      */
     public function handle()
     {
+        $this->info('Wait...');
         $skypicker_client = new Client();
         $flights = Flight::with('destination_points', 'departure_points')->get();
 
@@ -53,6 +54,7 @@ class GetFlightPrices extends Command
                 $flight->save();
             }
         }
+        $this->info('Finished!');
 
     }
 

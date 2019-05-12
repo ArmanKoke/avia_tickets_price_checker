@@ -37,9 +37,11 @@ class CheckFlights extends Command
      */
     public function handle()
     {
+        $this->info('Wait...');
         $skypicker_client = new Client();
 
         $flights = Flight::with('destination_points', 'departure_points')->get();
+        $all = count($flights);
         foreach ($flights as $flight) {
             $flight_data = $skypicker_client->checkFlights($flight->token, 1,1);
 
@@ -51,6 +53,9 @@ class CheckFlights extends Command
                 $flight->price_change = $flight_collection->price_change;
                 $flight->save();
             }
+            $left = $all-=1;
+            $this->info( $left .' left');
         }
+        $this->info('Finished!');
     }
 }
