@@ -33,6 +33,8 @@ class CheckFlights extends Command
     }
 
     /**
+     * Just a reminder that i check only one passenger with one bag
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function handle()
